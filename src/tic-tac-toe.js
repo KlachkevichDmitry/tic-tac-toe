@@ -46,14 +46,11 @@ class TicTacToe {
 
    }
 
-    isFinished() { /*должен вернуть true, если игра закончена (например, есть победитель или ничья)  либо false*/
-
-            return (this.winner=='x'||this.winner=='o'||this.columnTurn==9);
 
 
 
 
-    }
+
 
     getWinner() { /* должен вернуть символ победителя X либо О или null, если нет победитель еще не определен */
 
@@ -85,16 +82,41 @@ class TicTacToe {
       else {return this.winner=null}
     }
 
+    isFinished() { /*должен вернуть true, если игра закончена (например, есть победитель или ничья)  либо false*/
+
+        if (getWinner() || this.columnTurn == 9) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+
     noMoreTurns() { /* должен вернуть true, если клетки для ходов закончились */
         if (this.columnTurn==9) {
             return true;
         } else {return false;}
+
+
     }
 
-    isDraw() {  /* должен вернуть истину, если нет больше никаких клеток для ходов и нет победителя */
-        if (this.columnTurn==9||this.winner==null) {
-            return false;
-        } else {return true;}
+    isDraw() {  /*должен вернуть false если клетки для хода есть, но есть уже победитель, либо true если ничья */
+
+        /*should return false if game is not finished or there is a winner, and true if it is a draw*/
+        /*if (this.columnTurn==9)*/
+
+
+             if (this.columnTurn==9 && !this.winner) {return true;}
+               /* &&this.winner!=null*/
+            else{return false;}
+
+
+
+
+
+
+
+
 
 
     }
