@@ -10,18 +10,10 @@ class TicTacToe {
            /* 1 */ [null,null,null],
            /* 2 */ [null,null,null]];
         this.winner=null;
-
-
-
-
     }
 
     getCurrentPlayerSymbol() { /* ожидается Х или О */
-        if (this.turn=='x' ) {
-            return 'x';
-        } else {
-            return 'o';
-        }
+        return this.turn=='x'?"x":"o";
     }
 
     nextTurn(rowIndex, columnIndex) { /* должен правильно обновить состояние игрока(класса)*/
@@ -63,32 +55,35 @@ class TicTacToe {
         /*горизонталь*/
       if (this.field[0][0]==this.field[0][1]&&this.field[0][1]==this.field[0][2]){
         return this.winner=this.field[0][2]}
-      if (this.field[1][0]==this.field[1][1]&&this.field[1][1]==this.field[1][2]){
+      else if (this.field[1][0]==this.field[1][1]&&this.field[1][1]==this.field[1][2]){
          return this.winner=this.field[1][2]}
-      if (this.field[2][0]==this.field[2][1]&&this.field[2][1]==this.field[2][2]){
+      else if (this.field[2][0]==this.field[2][1]&&this.field[2][1]==this.field[2][2]){
          return this.winner=this.field[2][2]}
        /*вертикаль*/
-      if (this.field[0][0]==this.field[1][0]&&this.field[1][0]==this.field[2][0]){
+      else if (this.field[0][0]==this.field[1][0]&&this.field[1][0]==this.field[2][0]){
          return this.winner=this.field[2][0]}
-      if (this.field[0][1]==this.field[1][1]&&this.field[1][1]==this.field[2][1]){
+      else if (this.field[0][1]==this.field[1][1]&&this.field[1][1]==this.field[2][1]){
          return this.winner=this.field[2][1]}
-      if (this.field[0][2]==this.field[1][2]&&this.field[1][2]==this.field[2][2]){
+      else if (this.field[0][2]==this.field[1][2]&&this.field[1][2]==this.field[2][2]){
           return this.winner=this.field[2][2]}
         /*диагонали*/
-      if (this.field[0][0]==this.field[1][1]&&this.field[1][1]==this.field[2][2]){
+      else if (this.field[0][0]==this.field[1][1]&&this.field[1][1]==this.field[2][2]){
           return this.winner=this.field[2][2]}
-      if (this.field[0][2]==this.field[1][1]&&this.field[1][1]==this.field[2][0]){
+      else if (this.field[0][2]==this.field[1][1]&&this.field[1][1]==this.field[2][0]){
           return this.winner=this.field[2][0]}
       else {return this.winner=null}
     }
 
     isFinished() { /*должен вернуть true, если игра закончена (например, есть победитель или ничья)  либо false*/
 
-        if (getWinner() || this.columnTurn == 9) {
+      /*  if (this.winner!=null) {
             return true;
-        } else {
+        } else if(this.columnTurn >8) {
+		return true;}
+		 else{
             return false;
-        }
+        }*/
+		return (this.getWinner() !== null) || this.noMoreTurns();
     }
 
 
@@ -102,15 +97,16 @@ class TicTacToe {
 
     isDraw() {  /*должен вернуть false если клетки для хода есть, но есть уже победитель, либо true если ничья */
 
-        /*should return false if game is not finished or there is a winner, and true if it is a draw*/
+        
+		//should return true if there is no more turns and no winner
         /*if (this.columnTurn==9)*/
 
 
-             if (this.columnTurn==9 && !this.winner) {return true;}
-               /* &&this.winner!=null*/
-            else{return false;}
-
-
+            /* if (this.columnTurn<9 || this.winner!=null) {return false;}
+               
+            else if (this.columnTurn==9) {return true;}*/
+		
+		return this.noMoreTurns() && (this.getWinner() === null);
 
 
 
