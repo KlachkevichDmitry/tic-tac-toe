@@ -1,7 +1,5 @@
 class TicTacToe {
     constructor() {
-        
-
         this.columnTurn=0;
         this.turn='x';
         this.field=[
