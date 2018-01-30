@@ -13,39 +13,20 @@ class TicTacToe {
     }
 
     getCurrentPlayerSymbol() { /* ожидается Х или О */
-        return this.turn=='x'?"x":"o";
+        return this.turn=="x"?"x":"o";
     }
 
     nextTurn(rowIndex, columnIndex) { /* должен правильно обновить состояние игрока(класса)*/
         if (this.field[rowIndex][columnIndex]==null) {
             this.field[rowIndex][columnIndex]=this.turn;
             this.columnTurn++;
-
-
-
-            if (this.turn=='x') {
-                return this.turn = 'o';
-
-             } else {
-                return this.turn='x';
-
-             }
-
+			return this.turn=="x"?this.turn="o":this.turn="x";
         } else {
             return this.turn;
-
         }
-
    }
 
-
-
-
-
-
-
     getWinner() { /* должен вернуть символ победителя X либо О или null, если нет победитель еще не определен */
-
 
                    /*    0    1    2    */
             /* 0 *//* [null,null,null],
@@ -75,51 +56,19 @@ class TicTacToe {
     }
 
     isFinished() { /*должен вернуть true, если игра закончена (например, есть победитель или ничья)  либо false*/
-
-      /*  if (this.winner!=null) {
-            return true;
-        } else if(this.columnTurn >8) {
-		return true;}
-		 else{
-            return false;
-        }*/
-		return (this.getWinner() !== null) || this.noMoreTurns();
+		return (this.getWinner()!== null)||this.noMoreTurns();
     }
 
-
     noMoreTurns() { /* должен вернуть true, если клетки для ходов закончились */
-        if (this.columnTurn==9) {
-            return true;
-        } else {return false;}
-
-
+        return this.columnTurn==9;
     }
 
     isDraw() {  /*должен вернуть false если клетки для хода есть, но есть уже победитель, либо true если ничья */
-
-        
-		//should return true if there is no more turns and no winner
-        /*if (this.columnTurn==9)*/
-
-
-            /* if (this.columnTurn<9 || this.winner!=null) {return false;}
-               
-            else if (this.columnTurn==9) {return true;}*/
-		
-		return this.noMoreTurns() && (this.getWinner() === null);
-
-
-
-
-
-
-
-
+		return this.noMoreTurns()&&(this.getWinner() === null);
     }
 
-    getFieldValue(rowIndex, colIndex) { /* должен возвращять ряд и столбик, если такие есть */
+    getFieldValue(rowIndex, colIndex) { /* должен возвращять значение, если такое есть */
         return this.field[rowIndex][colIndex];
-
     }
 }
 
